@@ -27,12 +27,9 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `api_key` varchar(255) DEFAULT NULL,
   `token` varchar(65) DEFAULT NULL,
   `donate_percent` float DEFAULT '0',
-  `ap_threshold` float DEFAULT '0',
-  `coin_address` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `email` (`email`),
-  UNIQUE KEY `coin_address` (`coin_address`)
+  UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `blocks` (
@@ -46,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `blocks` (
   `accounted` tinyint(1) NOT NULL DEFAULT '0',
   `account_id` int(255) unsigned DEFAULT NULL,
   `worker_name` varchar(50) DEFAULT 'unknown',
-  `shares` int(255) unsigned DEFAULT NULL,
+  `shares` bigint(30) unsigned DEFAULT NULL,
   `share_id` bigint(30) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `height` (`height`,`blockhash`),
@@ -58,6 +55,7 @@ CREATE TABLE IF NOT EXISTS `coin_addresses` (
   `account_id` int(11) NOT NULL,
   `currency` varchar(5) NOT NULL,
   `coin_address` varchar(255) NOT NULL,
+  `ap_threshold` float DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `coin_address` (`coin_address`),
   KEY `account_id` (`account_id`)
@@ -144,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
   UNIQUE KEY `setting` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `settings` (`name`, `value`) VALUES ('DB_VERSION', '0.0.15');
+INSERT INTO `settings` (`name`, `value`) VALUES ('DB_VERSION', '1.0.1');
 
 CREATE TABLE IF NOT EXISTS `shares` (
   `id` bigint(30) NOT NULL AUTO_INCREMENT,
@@ -184,10 +182,10 @@ CREATE TABLE IF NOT EXISTS `statistics_shares` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `account_id` int(10) unsigned NOT NULL,
   `block_id` int(10) unsigned NOT NULL,
-  `valid` int(11) NOT NULL,
-  `invalid` int(11) NOT NULL DEFAULT '0',
-  `pplns_valid` int(11) NOT NULL,
-  `pplns_invalid` int(11) NOT NULL DEFAULT '0',
+  `valid` bigint(20) NOT NULL,
+  `invalid` bigint(20) NOT NULL DEFAULT '0',
+  `pplns_valid` bigint(20) NOT NULL,
+  `pplns_invalid` bigint(20) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `account_id` (`account_id`),
   KEY `block_id` (`block_id`)
