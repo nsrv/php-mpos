@@ -23,5 +23,5 @@
         <a href="{$smarty.server.SCRIPT_NAME}?page=password"><font size="1">パスワードを忘れた場合</font></a>
       </div>
     </div>
-  </form>
+  </form>aaaa
 </div>
