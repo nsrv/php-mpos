@@ -78,4 +78,3 @@ $aErrorCodes['E0079'] = 'ウォレットの残高が合計支払金額を下回�
 $aErrorCodes['E0080'] = 'No new unaccounted shares since last run';
 $aErrorCodes['E0081'] = 'Failed to insert new block into database';
 $aErrorCodes['E0082'] = 'Block does not supply any usable confirmation information';
-?>

@@ -5,6 +5,17 @@ class News extends Base {
   protected $table = 'news';
 
   /**
+   * We allow changing the database for shared accounts across pools
+   * Load the config on construct so we can assign the DB name
+   * @param config array MPOS configuration
+   * @return none
+   **/
+  public function __construct($config) {
+    $this->setConfig($config);
+    $this->table = $this->config['db']['shared']['news'] . '.' . $this->table;
+  }
+
+  /**
    * Get activation status of post
    * @param id int News ID
    * @return bool true or false
@@ -88,6 +99,7 @@ class News extends Base {
     if (empty($aData['header'])) return false;
     if (empty($aData['content'])) return false;
     if (!is_int($account_id)) return false;
+    if (@$aData['active']) $active = true;
     $stmt = $this->mysqli->prepare("INSERT INTO $this->table (account_id, header, content, active) VALUES (?,?,?,?)");
     if ($stmt && $stmt->bind_param('issi', $account_id, $aData['header'], $aData['content'], $active) && $stmt->execute())
       return true;
@@ -95,9 +107,8 @@ class News extends Base {
   }
 }
 
-$news = new News();
+$news = new News($config);
 $news->setDebug($debug);
 $news->setMysql($mysqli);
 $news->setUser($user);
 $news->setErrorCodes($aErrorCodes);
-?>

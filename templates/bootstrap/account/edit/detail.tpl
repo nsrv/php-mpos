@@ -50,9 +50,13 @@
             <div class="form-group">
               <label>自動出金</label>
               </br>
+<<<<<<< HEAD
               <font size="1">{$GLOBAL.config.ap_threshold.min}～{$GLOBAL.config.ap_threshold.max} {$GLOBAL.config.currency}の間で指定できます 0を指定すると自動で出金されません。{if $GLOBAL.config.txfee_auto > 0} A {if $GLOBAL.config.txfee_auto > 0.00001}{$GLOBAL.config.txfee_auto}{else}{$GLOBAL.config.txfee_auto|number_format:"8"}{/if} {$GLOBAL.config.currency} TX fee will apply <span id="tt"><img width="15px" height="15px" title="This {if $GLOBAL.config.txfee_auto > 0.00001}{$GLOBAL.config.txfee_auto}{else}{$GLOBAL.config.txfee_auto|number_format:"8"}{/if} automatic payment transaction fee is a network fee and goes back into the network not the pool." src="site_assets/bootstrap/images/questionmark.png"></span>{/if}</font>
+=======
+              <font size="1">{if $GLOBAL.config.ap_threshold.min < 0.0001}{$GLOBAL.config.ap_threshold.min|number_format:"8"}{else}{$GLOBAL.config.ap_threshold.min}{/if} - {if $GLOBAL.config.ap_threshold.max < 0.0001}{$GLOBAL.config.ap_threshold.max|number_format:"8"}{else}{$GLOBAL.config.ap_threshold.max}{/if} {$GLOBAL.config.currency}. Set to '0' for no auto payout.{if $GLOBAL.config.txfee_auto > 0} A {if $GLOBAL.config.txfee_auto > 0.00001}{$GLOBAL.config.txfee_auto}{else}{$GLOBAL.config.txfee_auto|number_format:"8"}{/if} {$GLOBAL.config.currency} TX fee will apply <span id="tt"><img width="15px" height="15px" title="This {if $GLOBAL.config.txfee_auto > 0.00001}{$GLOBAL.config.txfee_auto}{else}{$GLOBAL.config.txfee_auto|number_format:"8"}{/if} automatic payment transaction fee is a network fee and goes back into the network not the pool." src="site_assets/bootstrap/images/questionmark.png"></span>{/if}</font>
+>>>>>>> b7b45eb580dfd7f683540b519a66e14d3fe8321d
               </br>
-              <input class="form-control" type="text" name="payoutThreshold" value="{nocache}{$smarty.request.payoutThreshold|default:$GLOBAL.userdata.ap_threshold|escape}{/nocache}" size="{$GLOBAL.config.ap_threshold.max|strlen}" maxlength="{$GLOBAL.config.ap_threshold.max|strlen}" {if $GLOBAL.twofactor.enabled && $GLOBAL.twofactor.options.details && !$DETAILSUNLOCKED}id="disabledInput" disabled{/if}/>
+              <input class="form-control" type="text" name="payoutThreshold" value="{nocache}{$smarty.request.payoutThreshold|default:$GLOBAL.userdata.ap_threshold|escape}{/nocache}" size="{$GLOBAL.config.ap_threshold.max|strlen+4}" maxlength="{if $GLOBAL.config.ap_threshold.max < 1}10{else}{$GLOBAL.config.ap_threshold.max|strlen}{/if}" {if $GLOBAL.twofactor.enabled && $GLOBAL.twofactor.options.details && !$DETAILSUNLOCKED}id="disabledInput" disabled{/if}/>
             </div>
             <div class="form-group">
               <label>アカウント名を隠す</label>

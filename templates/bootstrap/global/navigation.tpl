@@ -27,12 +27,22 @@
                     <li {if $smarty.get.page|default:"0" eq "admin"}class="active"{/if}>
                         <a href="#"><i class="fa fa-wrench fa-fw"></i> 管理用パネル<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
+<<<<<<< HEAD
                           <li {if $smarty.get.action|default:"0" eq "dashboard" || $smarty.get.action|default:"0" eq "monitoring" || $smarty.get.action|default:"0" eq "settings"}class="active"{/if}>
                             <a href="#"><i class="fa fa-linux fa-fw"></i> システム <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
                               <li><a href="{$smarty.server.SCRIPT_NAME}?page=admin&action=dashboard"><i class="fa fa-dashboard fa-fw"></i> ダッシュボード</a></li>
                               <li><a href="{$smarty.server.SCRIPT_NAME}?page=admin&action=monitoring"><i class="fa fa-bell-o fa-fw"></i> モニタリング</a></li>
                               <li><a href="{$smarty.server.SCRIPT_NAME}?page=admin&action=settings"><i class="fa fa-gears fa-fw"></i> 設定</a></li>
+=======
+                          <li {if $smarty.get.action|default:"0" eq "dashboard" || $smarty.get.action|default:"0" eq "monitoring" || $smarty.get.action|default:"0" eq "settings" || $smarty.get.action|default:"0" eq "setup"}class="active"{/if}>
+                            <a href="#"><i class="fa fa-linux fa-fw"></i> System <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                              <li><a href="{$smarty.server.SCRIPT_NAME}?page=admin&action=setup"><i class="fa fa-book fa-fw"></i> Setup</a></li>
+                              <li><a href="{$smarty.server.SCRIPT_NAME}?page=admin&action=dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
+                              <li><a href="{$smarty.server.SCRIPT_NAME}?page=admin&action=monitoring"><i class="fa fa-bell-o fa-fw"></i> Monitoring</a></li>
+                              <li><a href="{$smarty.server.SCRIPT_NAME}?page=admin&action=settings"><i class="fa fa-gears fa-fw"></i> Settings</a></li>
+>>>>>>> b7b45eb580dfd7f683540b519a66e14d3fe8321d
                             </ul>
                           </li>
                           <li {if $smarty.get.action|default:"0" eq "wallet" || $smarty.get.action|default:"0" eq "transactions"}class="active"{/if}>
