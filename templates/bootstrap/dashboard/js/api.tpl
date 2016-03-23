@@ -165,8 +165,8 @@ $(document).ready(function(){
         $('#b-workers').append('<tr><td class="text-left">' + workers[i].username + '</td><td class="text-right">' + number_format(workers[i].hashrate, 2) + '</td><td class="text-right">' + workers[i].difficulty + '</td></tr>');
       }
     }
-    if (j == 0) { $('#b-workers').html('<tr><td colspan="3" class="text-center">No active workers</td></tr>'); }
-    if (totalHashrate > 0) { $('#b-workers').append('<tr><td class="text-left"><b>Total</b></td><td class="text-right">' + number_format(totalHashrate, 2) + '</td><td></td></tr>'); }
+    if (j == 0) { $('#b-workers').html('<tr><td colspan="3" class="text-center">アクティブなワーカーがありません。</td></tr>'); }
+    if (totalHashrate > 0) { $('#b-workers').append('<tr><td class="text-left"><b>合計</b></td><td class="text-right">' + number_format(totalHashrate, 2) + '</td><td></td></tr>'); }
   }
 
   function refreshBlockData(data) {

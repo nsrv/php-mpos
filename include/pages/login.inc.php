@@ -20,7 +20,7 @@ if ($setting->getValue('recaptcha_enabled') && $setting->getValue('recaptcha_ena
 
 if (!empty($_POST['username']) && !empty($_POST['password'])) {
   if ($setting->getValue('maintenance') && !$user->isAdmin($user->getUserIdByEmail($_POST['username']))) {
-    $_SESSION['POPUP'][] = array('CONTENT' => 'You are not allowed to login during maintenace.', 'TYPE' => 'alert alert-info');
+    $_SESSION['POPUP'][] = array('CONTENT' => '申し訳ありません。メンテナンス中にログインすることはできません。', 'TYPE' => 'alert alert-info');
   } else {
     // Check if recaptcha is enabled, process form data if valid
     if (!$setting->getValue('recaptcha_enabled') || !$setting->getValue('recaptcha_enabled_logins') || ($setting->getValue('recaptcha_enabled') && $setting->getValue('recaptcha_enabled_logins') && $rsp->is_valid)) {
@@ -34,13 +34,13 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
           if (!headers_sent()) header('Location: ' . $location);
           exit('<meta http-equiv="refresh" content="0; url=' . htmlspecialchars($location) . '"/>');
         } else {
-          $_SESSION['POPUP'][] = array('CONTENT' => 'Unable to login: '.$user->getError(), 'TYPE' => 'alert alert-danger');
+          $_SESSION['POPUP'][] = array('CONTENT' => 'ログインに失敗しました。: '.$user->getError(), 'TYPE' => 'alert alert-danger');
         }
       } else {
         $_SESSION['POPUP'][] = array('CONTENT' => $csrftoken->getErrorWithDescriptionHTML(), 'TYPE' => 'alert alert-warning');
       }
     } else {
-      $_SESSION['POPUP'][] = array('CONTENT' => 'Invalid Captcha, please try again.', 'TYPE' => 'alert alert-danger');
+      $_SESSION['POPUP'][] = array('CONTENT' => 'Captchaの文字列が一致しません。もう一度お試しください。', 'TYPE' => 'alert alert-danger');
     }
   }
 }

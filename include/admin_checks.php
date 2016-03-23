@@ -18,7 +18,7 @@ if (@$_SESSION['USERDATA']['is_admin'] && $user->isAdmin(@$_SESSION['USERDATA'][
   // logging
   if ($config['logging']['enabled']) {
     if (!is_writable($config['logging']['path'])) {
-      $error[] = "Logging is enabled but we can't write in the logfile path";
+      $error[] = "ログ記録が有効になっていますが、指定されたパスに書き込めません。";
     }
   }
 
@@ -67,14 +67,16 @@ if (@$_SESSION['USERDATA']['is_admin'] && $user->isAdmin(@$_SESSION['USERDATA'][
   }
 
   // check if daemon can connect -> error
+  // コインデーモンへの接続状態のチェック
   try {
     if ($bitcoin->can_connect() !== true) {
-      $error[] = "Unable to connect to coin daemon using provided credentials";
+      $error[] = "設定された資格情報を利用してコインデーモンに接続できません。";
     }
     else {
       // validate that the wallet service is not in test mode
+	  // コインデーモンがTESTNET設定でないかチェック
       if ($bitcoin->is_testnet() == true) {
-        $error[] = "The coin daemon service is running as a testnet. Check the TESTNET setting in your coin daemon config and make sure the correct port is set in the MPOS config.";
+        $error[] = "コインデーモンがTESTNETとして実行されています。コインデーモンの設定を確認するか、MPOSのポート番号が正しく設定されているか確認してください。";
       }
 
       // if coldwallet is not empty, check if the address is valid -> error
@@ -86,7 +88,7 @@ if (@$_SESSION['USERDATA']['is_admin'] && $user->isAdmin(@$_SESSION['USERDATA'][
       // check if there is more than one account set on wallet
       $accounts = $bitcoin->listaccounts();
       if (count($accounts) > 1 && $accounts[''] <= 0) {
-        $error[] = "There are " . count($accounts) . " Accounts set in local Wallet and Default Account has no liquid funds to pay your miners!";
+        $error[] = "There are " . count($accounts) . " アカウントはローカルに設定され、採掘者に支払う資金がありません。";
       }
     }
   } catch (Exception $e) {
@@ -134,7 +136,7 @@ if (@$_SESSION['USERDATA']['is_admin'] && $user->isAdmin(@$_SESSION['USERDATA'][
     $_SESSION['POPUP'][] = array('CONTENT' => $en, 'TYPE' => 'alert alert-info');
   }
   if (!count($notice) && !count($error)) {
-    $_SESSION['POPUP'][] = array('CONTENT' => 'The config options we checked seem OK', 'TYPE' => 'alert alert-success');
+    $_SESSION['POPUP'][] = array('CONTENT' => 'コンフィグファイルのオプションは問題ないように見えます。', 'TYPE' => 'alert alert-success');
   } else {
     foreach ($notice as $n) {
       $_SESSION['POPUP'][] = array('CONTENT' => $n, 'TYPE' => 'alert alert-warning');

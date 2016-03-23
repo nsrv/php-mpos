@@ -5,7 +5,7 @@
     <input type="hidden" name="ctoken" value="{$CTOKEN|escape|default:""}" />
     <div class="panel panel-info">
       <div class="panel-heading">
-        <i class="fa fa-search fa-fw"></i> Transaction Filter
+        <i class="fa fa-search fa-fw"></i> トランザクション検索
       </div>
       <div class="panel-body">
             <ul class="pager">
@@ -17,16 +17,16 @@
               </li>
             </ul>
             <div class="form-group">
-              <label>Type</label>
+              <label>種類</label>
               {html_options class="form-control select-mini" name="filter[type]" options=$TRANSACTIONTYPES selected=$smarty.request.filter.type|default:""}
             </div>
             <div class="form-group">
-              <label>Status</label>
+              <label>状態</label>
               {html_options class="form-control select-mini" name="filter[status]" options=$TXSTATUS selected=$smarty.request.filter.status|default:""}
             </div>
       </div>
       <div class="panel-footer">
-        <input type="submit" value="Filter" class="btn btn-success btn-sm">
+        <input type="submit" value="検索" class="btn btn-success btn-sm">
       </div>
     </div>
   </form>
@@ -34,7 +34,7 @@
   <div class="col-lg-9">
     <div class="panel panel-info">
       <div class="panel-heading">
-        <i class="fa fa-clock-o fa-fw"></i> Transaction History
+        <i class="fa fa-clock-o fa-fw"></i> トランザクション履歴
       </div>
       <div class="panel-body no-padding">
         <div class="table-responsive">
@@ -42,13 +42,13 @@
             <thead>
               <tr>
                 <th class="h6">ID</th>
-                <th class="h6">Date</th>
-                <th class="h6">TX Type</th>
-                <th class="h6">Status</th>
-                <th class="h6">Payment Address</th>
-                <th class="h6">TX #</th>
-                <th class="h6">Block #</th>
-                <th class="h6">Amount</th>
+                <th class="h6">日付</th>
+                <th class="h6">種類</th>
+                <th class="h6">状態</th>
+                <th class="h6">送金先アドレス</th>
+                <th class="h6">取引番号</th>
+                <th class="h6">ブロック番号</th>
+                <th class="h6">金額</th>
               </tr>
             </thead>
             <tbody>
@@ -66,11 +66,11 @@
                   $TRANSACTIONS[transaction].type == 'TXFee' OR
                   $TRANSACTIONS[transaction].confirmations >= $GLOBAL.confirmations
                   }
-                  <span class="label label-success">Confirmed</span>
+                  <span class="label label-success">検証済み</span>
                   {else if $TRANSACTIONS[transaction].confirmations == -1}
-                  <span class="label label-danger">Orphaned</span>
+                  <span class="label label-danger">孤立（無効）</span>
                   {else}
-                  <span class="label label-warning">Unconfirmed</span>
+                  <span class="label label-warning">未検証</span>
                   {/if}
                 </td>
                 <td><a href="#" onClick="alert('{$TRANSACTIONS[transaction].coin_address|escape}')">{$TRANSACTIONS[transaction].coin_address|truncate:20:"...":true:true}</a></td>
@@ -88,7 +88,7 @@
         </div>
       </div>
       <div class="panel-footer">
-        <h6><b>Debit_AP</b> = Auto Threshold Payment, <b>Debit_MP</b> = Manual Payment, <b>Donation</b> = Donation, <b>Fee</b> = Pool Fees (if applicable)</h6>
+        <h6><b>Debit_AP</b> = 自動払い出し　　<b>Debit_MP</b> = 手動出金　　<b>Donation</b> = 寄付金　　<b>Fee</b> = プールの手数料</h6>
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@
   <div class="col-lg-12">
     <div class="panel panel-info">
       <div class="panel-heading">
-        <i class="fa fa-clock-o fa-fw"></i> Block Overview
+        <i class="fa fa-clock-o fa-fw"></i> 発見ブロックの概要
       </div>
       <div class="panel-body no-padding">
         <div class="table-responsive">
@@ -10,22 +10,22 @@
             <thead>
               <tr>
                 <th></th>
-                <th class="text-right">Gen. Est.</th>
-                <th class="text-right">Found</th>
-                <th class="text-right">Valid</th>
-                <th class="text-right">Orphan</th>
-                <th class="text-right">Orphan %</th>
-                <th class="text-right">Avg. Diff</th>
-                <th class="text-right">Shares Est.</th>
-                <th class="text-right">Shares</th>
-                <th class="text-right">Percentage</th>
-                <th class="text-right">Amount</th>
-                <th class="text-right">Rate Est.</th>
+                <th class="text-right">生成数</th>
+                <th class="text-right">発見数</th>
+                <th class="text-right">有効</th>
+                <th class="text-right">無効</th>
+                <th class="text-right">無効の割合（％）</th>
+                <th class="text-right">難易度の平均</th>
+                <th class="text-right">予測シェア</th>
+                <th class="text-right">実際のシェア</th>
+                <th class="text-right">予測に対する割合</th>
+                <th class="text-right">採掘額</th>
+                <th class="text-right">ネットワークでの割合</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th>All Time</th>
+                <th>全期間</th>
                 <td class="text-right">{($FIRSTBLOCKFOUND / $COINGENTIME)|number_format}</td>
                 <td class="text-right">{$LASTBLOCKSBYTIME.Total|number_format}</td>
                 <td class="text-right">{$LASTBLOCKSBYTIME.TotalValid|number_format}</td>
@@ -51,7 +51,7 @@
                 <td class="text-right">{($LASTBLOCKSBYTIME.Total|default:"0.00" / ($FIRSTBLOCKFOUND / $COINGENTIME)  * 100)|number_format:"2"}%</td>
               </tr>
               <tr>
-                <th>Last Hour</th>
+                <th>１時間</th>
                 <td class="text-right">{(3600 / $COINGENTIME)|number_format}</td>
                 <td class="text-right">{$LASTBLOCKSBYTIME.1HourTotal|number_format}</td>
                 <td class="text-right">{$LASTBLOCKSBYTIME.1HourValid|number_format}</td>
@@ -77,7 +77,7 @@
                 <td class="text-right">{($LASTBLOCKSBYTIME.1HourTotal|default:"0.00" / (3600 / $COINGENTIME)  * 100)|number_format:"2"}%</td>
               </tr>
               <tr>
-                <th style="padding-left:3px;padding-right:1px;">Last 24 Hours</th>
+                <th style="padding-left:3px;padding-right:1px;">２４時間</th>
                 <td class="text-right">{(86400 / $COINGENTIME)|number_format}</td>
                 <td class="text-right">{$LASTBLOCKSBYTIME.24HourTotal|number_format}</td>
                 <td class="text-right">{$LASTBLOCKSBYTIME.24HourValid|number_format}</td>
@@ -103,7 +103,7 @@
                 <td class="text-right">{($LASTBLOCKSBYTIME.24HourTotal|default:"0.00" / (86400 / $COINGENTIME)  * 100)|number_format:"2"}%</td>
               </tr>
               <tr>
-                <th>Last 7 Days</th>
+                <th>７日間（168時間）</th>
                 <td class="text-right">{(604800 / $COINGENTIME)|number_format}</td>
                 <td class="text-right">{$LASTBLOCKSBYTIME.7DaysTotal|number_format}</td>
                 <td class="text-right">{$LASTBLOCKSBYTIME.7DaysValid|number_format}</td>
@@ -129,7 +129,7 @@
                 <td class="text-right">{($LASTBLOCKSBYTIME.7DaysTotal|default:"0.00" / (604800 / $COINGENTIME)  * 100)|number_format:"2"}%</td>
               </tr>
               <tr>
-                <th>Last 4 Weeks</th>
+                <th>１ヶ月間（4週間）</th>
                 <td class="text-right">{(2419200 / $COINGENTIME)|number_format}</td>
                 <td class="text-right">{$LASTBLOCKSBYTIME.4WeeksTotal|number_format}</td>
                 <td class="text-right">{$LASTBLOCKSBYTIME.4WeeksValid|number_format}</td>
@@ -155,7 +155,7 @@
                 <td class="text-right">{($LASTBLOCKSBYTIME.4WeeksTotal|default:"0.00" / (2419200 / $COINGENTIME)  * 100)|number_format:"2"}%</td>
               </tr>
               <tr>
-                <th>The Past 12 Months</th>
+                <th>１２ヶ月間</th>
                 <td class="text-right">{(29030400 / $COINGENTIME)|number_format}</td>
                 <td class="text-right">{$LASTBLOCKSBYTIME.12MonthTotal|number_format}</td>
                 <td class="text-right">{$LASTBLOCKSBYTIME.12MonthValid|number_format}</td>
@@ -185,7 +185,7 @@
         </div>
       </div>
       <div class="panel-footer">
-        <h6>{if $GLOBAL.config.payout_system != 'pps'}Round earnings are not credited until <font class="confirmations">{$GLOBAL.confirmations}</font> confirms.{/if}</h6>
+        <h6>{if $GLOBAL.config.payout_system != 'pps'}・採掘したMONAは <font class="confirmations">{$GLOBAL.confirmations}</font> ブロック検証されるまで入金されません。{/if}</h6>
       </div>
     </div>
   </div>

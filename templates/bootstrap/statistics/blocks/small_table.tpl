@@ -1,16 +1,16 @@
   <div class="col-lg-6">
     <div class="panel panel-info">
       <div class="panel-heading">
-        <i class="fa fa-th fa-fw"></i> Last Found Blocks
+        <i class="fa fa-th fa-fw"></i> ブロックの発見履歴
       </div>
       <div class="panel-body no-padding table-responsive">
         <table class="table table-striped table-bordered table-hover">
           <thead>
             <tr>
-              <th>Block</th>
-              <th>Finder</th>
-              <th>Time</th>
-              <th class="text-right">Actual Shares</th>
+              <th>ブロック</th>
+              <th>ユーザー名</th>
+              <th>発見時刻</th>
+              <th class="text-right">実際のシェア</th>
             </tr>
           </thead>
           <tbody>
@@ -32,7 +32,7 @@
       </div>
 {if $GLOBAL.config.payout_system != 'pps'}
       <div class="panel-footer">
-          <h6>Note: Round Earnings are not credited until <font class="confirmations">{$GLOBAL.confirmations}</font> confirms.</h6>
+          <h6>・採掘したMONAは <font class="confirmations">{$GLOBAL.confirmations}</font> ブロック検証されるまで入金されません。</h6>
       </div>
 {/if}
     </div>

@@ -29,9 +29,9 @@ if ($setting->getValue('notifications_disable_pool_newsletter', 0) == 1) {
           $iSuccess++;
         }
       }
-      $_SESSION['POPUP'][] = array('CONTENT' => 'Newsletter sent to ' . $iSuccess . ' users.', 'TYPE' => 'alert alert-success');
+      $_SESSION['POPUP'][] = array('CONTENT' => 'ニュースレターを' . $iSuccess . '人のメールアドレスに送信しました。', 'TYPE' => 'alert alert-success');
       if ($iFailed > 0)
-        $_SESSION['POPUP'][] = array('CONTENT' => 'Failed to send e-mail to ' . $iFailed . ' users. ', 'TYPE' => 'alert alert-info');
+        $_SESSION['POPUP'][] = array('CONTENT' => $iFailed . 'ユーザーのメールアドレスに送信できませんでした。', 'TYPE' => 'alert alert-info');
     } else {
       $_SESSION['POPUP'][] = array('CONTENT' => $csrftoken->getErrorWithDescriptionHTML(), 'TYPE' => 'alert alert-warning');
     }

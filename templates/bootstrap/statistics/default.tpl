@@ -7,7 +7,7 @@
         <table class="table table-striped table-bordered table-hover">
           <tbody>
             <tr>
-              <td class="leftheader">Pool Hash Rate</td>
+              <td class="leftheader">プールのハッシュレート</td>
               <td>{$GLOBAL.hashrate} {$GLOBAL.hashunits.pool}</td>
             </tr>
             <tr>
@@ -15,18 +15,18 @@
               <td>{$GLOBAL.workers}</td>
             </tr>
             <tr>
-              <td class="leftheader">Current Block</td>
+              <td class="leftheader">現在のブロック情報</td>
               <td><a href="{$GLOBAL.website.blockexplorer.url}{$CURRENTBLOCK}" target="_new">{$CURRENTBLOCK}</a></td>
             </tr>
             <tr>
-              <td class="leftheader">Current Difficulty</td>
+              <td class="leftheader">現在の採掘難易度</td>
               <td><a href="http://allchains.info/" target="_new">{$DIFFICULTY}</a></td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="panel-footer">
-        {if !$GLOBAL.website.api.disabled}<ul><li>These stats are also available in JSON format <a href="{$smarty.server.SCRIPT_NAME}?page=api&action=public" target="_api">HERE</a></li>{/if}
+        {if !$GLOBAL.website.api.disabled}<ul><li>こちらの統計情報は<a href="{$smarty.server.SCRIPT_NAME}?page=api&action=public" target="_api">JSON形式</a>も提供しています。</li>{/if}
       </div>
     </div>
   </div>

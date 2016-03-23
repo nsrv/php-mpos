@@ -1,10 +1,51 @@
-<p>This Agreement governs your use of {$GLOBAL.website.name}.</p>
+<p>{$GLOBAL.website.name}を利用する場合、本規約が適用されます。</p>
+<p>当プールをご利用いただくには、本規約に同意いただく必要があります。</p><br>
 <ul>
-  <li>By using any of the Pools or registering an account on the website, you agree to be bound by the terms and conditions below. If you do not agree with the terms and conditions in this Agreement you may not use the Pool.</li>
-  <li>The {$GLOBAL.website.name} staff may modify this Agreement and any policies affecting the Site at any point of time. Such modification is effective immediately upon posting to the website and will be distribution via email, forum post and a link in chat. Your continued use of the Pool following any modification to this Agreement shall be deemed an acceptance of all modifications.</li>
-  <li>The Pool rewards miners according to a <strong>{$GLOBAL.config.payout_system|upper}</strong> system with <strong>{$GLOBAL.fees|upper}%</strong> fee. The fee may change at any time, but notice will be given before doing so. Any fee change will be communicated through the pools news page.</li>
-  <li>The Pool is not an e-wallet or a bank for your coins. The Pool and it's operators are not responsible for any loss of coins which are stored on the Pool. It is your responsibility to configure your account so that the coins you mine are regularly transferred to your own secured offline wallet.</li>
-  <li>The uptime of the pool or website is not guaranteed, maintenance and downtime may be required at times. Users are responsible for configuring their miners so that they will automatically reconnect, switch to all the pools we offer or a backup pool in the case of downtime.</li>
-  <li>Botnets are not welcome. Accounts with a large amount of miners connecting from different IPs may be suspended without prior notice. If we are uncertian then an investigation will be opened and the user will be notified via their configured e-mail address. If we do not receive a response your account may be suspended.</li>
-  <li>Multiple accounts controlled by one person may be considered as a botnet and an investigation will be opened, see above point.</li>
+  株式会社ｎｓｒｖが運営する「nsrv Co.,Ltd - monacoin pool」（以下「本サイト」という）を利用するすべてのご利用者様（以下 「利用者」という）は、以下の利用規約に同意したものとみなします。<br>
+未成年の利用者様は、 保護者の同意に基づいて本サービスをご利用ください。<br><br>
+
+<li>第１条</li>
+１．当社は、本サイトにおいて提供される各サービス及び記事の内容等の正確性に対する保証を一切しておりません。また、当社は利用者が各サービスを利用したことに起因する直接的又は間接的な損害に関して一切責任を負わないものとします。<br>
+２．当社は、本サイトまたはリンク先サイト内のすべての情報等に、ウイルスなどの有害物が含まれていないこと、および第三者からの不正なアクセスのないこと、その他の安全性に関して一切の保証を行わないものとします。<br>
+
+<li>第二条</li>
+１．本サイトの利用者は原則一つの個人または法人につき、一つまでのアカウントを作成できるものとします。<br>
+２．第一項に違反して複数のアカウントを所持していることが発覚した場合は、当社は同違反者の利用しているアカウントをすべて凍結し、今後のサービスの利用をお断りする場合があります。<br>
+３．その他当社が不適切と認める利用者に対して、予告なしにアカウント停止等の措置をする場合があります。
+
+<li>第三条</li>
+１．本サイトを構成するすべてのデータ、記事、画像等のすべての著作権は、当社またはMPOS等の作成者に帰属します。利用者は、当社が特段の事情があると判断した場合または、オープンソースライセンスの定める場合を除き、本サイトの画像、記事及び文章等を他のサイト、雑誌、広告等に転載できないものとします。　但し、オープンソースライセンスの適用を受ける部分についてはそのライセンスの範囲で本サイト上のプログラム、画像、記事及び文章等をＷＥＢサイト上において転載及び引用することができるものとします。<br>
+２．前項に違反して本サイトに掲載の情報等を無断で転載した場合、当社は著作権法に基づく各処置（警告，告訴，損害賠償請求，差止請求，名誉回復措置等請求等）を行う場合があります。<br>
+
+<li>第四条</li>
+１．本サイトを構成するすべてのプログラム、ソフトウェア、記事、商標及び商号ならびに当社及び当社が業務提携する事業者等が提供するサービス及びそれに付随する技術全般に関する権利は、当社またはプログラムの製作者又は情報提供者等に帰属するものであり、利用者は、同権利等を侵害する行為を一切行ってはなりません。<br>
+２．利用者は、本サイトを構成するすべてのプログラム、ソフトウェア等に対して侵害行為（クラッキング、DDOS攻撃等のサービスを妨害する行為等）を行ってはなりません。<br>
+３．本条の規定に違反して紛争が発生した場合、自己の費用と責任において、当該紛争を解決するとともにいかなる場合も当社を免責するものとします。<br>
+
+<li>第五条</li>
+１．利用者が本規約、本サイト内の規約又はガイドライン及び法令の定めに違反したことにより、当社及び当社が業務提携する事業者等を含む第三者に損害を及ぼした場合、同利用者は当該損害を賠償する責任を負うものとします。<br>
+２．第３条に違反し当社、当社が業務提携する事業者等又は第三者に損害を与えた利用者等は、当社、当社が業務提携する事業者等及び他の利用者等又は第三者が受けたすべての損害を賠償する義務を負うものとします。<br>
+
+<li>第六条</li>
+１．当社は利用者に事前の通知なく、一時的にサービスの提供を停止することができるものとします。各サービスの停止による直接又は間接に生じた利用者又は第三者の損失や損害について当社は一切の責任を負わないものとします。<br>
+２．当社は、前項の理由により各サービスの一時停止を行った場合において各サービスの継続的な提供が困難だと判断した場合、第６条の規定に係わらず利用者等に対して通知を行わず各サービスを終了することができるものとします。<br>
+
+<li>第七条</li>
+１．当社は、利用者に対し１０日前までに通知を行うことにより各サービスを終了することができるものとします。<br>
+２．前項の各サービス終了の通知について当社は、利用者に対して本サイト内への掲示又はメールの送信をもって行うものとします。<br>
+３．サービスの終了時にアカウント内に仮想通貨等の残高が残っている場合は、サービス終了時点で権利を放棄したものとします。<br>
+４．第１項の各サービス終了によって直接又は間接的に生じた利用者又は第三者の損失や損害についてその内容の如何に係わらず、当社は一切の損害の責任を負いません。<br>
+
+<li>第八条</li>
+１．本規約に関連して、利用者と当社との間で紛争が生じた場合には、ともに誠意をもって協議するものとします。<br>
+２．前項により協議をしても解決しない場合は、東京地方裁判所または長野地方裁判所を第一審の専属的合意管轄裁判所とします。<br>
+３．本規約の準拠法は、日本国法とします。<br>
+
+<li>第九条</li>
+当社は、当社の都合により本規約の内容を必要に応じ予告なくして改定することができるものとします。改定後に利用者が各サービスを利用した場合には改定に同意したものとみなします。なお、利用規約を確認しなかったことに起因する直接または間接に生じた利用者及び第三者に与える損害については、その内容の如何に係わらず当社は一切の責任を負わないものとします。<br>
+<br>
+<br>
+平成２６年９月２４日
 </ul>
+<br><br>
+<p>※本利用規約はオープンソースライセンスの条項を変更するものではありません。</p>

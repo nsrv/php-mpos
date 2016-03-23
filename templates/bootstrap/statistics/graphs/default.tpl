@@ -5,7 +5,7 @@ $(function () {
     data: {$YOURMININGSTATS},
     xkey: 'time',
     ykeys: ['hashrate'],
-    labels: ['Hashrate'],
+    labels: ['ハッシュレート'],
     pointSize: 1,
     hideHover: 'auto',
     resize: true,
@@ -20,7 +20,7 @@ $(function () {
     data: {$YOURMININGSTATS},
     xkey: 'time',
     ykeys: ['workers'],
-    labels: ['Workers'],
+    labels: ['ワーカー数'],
     pointSize: 1,
     hideHover: 'auto',
     resize: true,
@@ -35,7 +35,7 @@ $(function () {
     data: {$YOURMININGSTATS},
     xkey: 'time',
     ykeys: ['sharerate'],
-    labels: ['Sharerate'],
+    labels: ['シェアレート'],
     pointSize: 1,
     hideHover: 'auto',
     resize: true,
@@ -51,13 +51,13 @@ $(function () {
   <div class="col-lg-12">
     <div class="panel panel-info">
       <div class="panel-heading">
-        <i class="fa fa-signal fa-fw"></i> Average Hashrate past 24h
+        <i class="fa fa-signal fa-fw"></i> ハッシュレート（過去24時間）
       </div>
       <div class="panel-body">
         <div id="hashrate-area-chart"></div>
       </div>
       <div class="panel-footer">
-        Your average hashrate per hour, updated every backend cron run.
+        アカウントの1時間当たりの平均ハッシュレート
       </div>
     </div>
   </div>
@@ -67,30 +67,32 @@ $(function () {
   <div class="col-lg-12">
     <div class="panel panel-info">
       <div class="panel-heading">
-        <i class="fa fa-signal fa-fw"></i> Average Workers past 24h
-      </div>
-      <div class="panel-body">
-        <div id="workers-area-chart"></div>
-      </div>
-      <div class="panel-footer">
-        Your average active workers per hour, updated every backend cron run.
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-lg-12">
-    <div class="panel panel-info">
-      <div class="panel-heading">
-        <i class="fa fa-signal fa-fw"></i> Average Sharerate past 24h
+        <i class="fa fa-signal fa-fw"></i> シェアレート（過去24時間）
       </div>
       <div class="panel-body">
         <div id="sharerate-area-chart"></div>
       </div>
       <div class="panel-footer">
-        Your share rate per hour, updated every backend cron run.
+        アカウントの1時間当たりの平均シェアレート
       </div>
     </div>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <i class="fa fa-signal fa-fw"></i> ワーカー数（過去24時間）
+      </div>
+      <div class="panel-body">
+        <div id="workers-area-chart"></div>
+      </div>
+      <div class="panel-footer">
+        アカウントの1時間当たりの平均ワーカー数
+      </div>
+    </div>
+  </div>
+</div>
+
+

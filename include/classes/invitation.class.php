@@ -113,15 +113,15 @@ class Invitation extends Base {
       return false;
     }
     $aData['username'] = $this->user->getUserName($account_id);
-    $aData['subject'] = 'Pending Invitation';
-    $this->log->log("info", $this->user->getUserName($account_id)." sent an invitation");
+    $aData['subject'] = 'プールへの招待';
+    $this->log->log("info", $this->user->getUserName($account_id)." 招待メールの送信");
     if ($this->mail->sendMail('invitations/body', $aData)) {
       $aToken = $this->token->getToken($aData['token'], 'invitation');
       if (!$this->createInvitation($account_id, $aData['email'], $aToken['id']))
         return false;
       return true;
     } else {
-      $this->log->log("warn", $this->user->getUserName($account_id)." sent an invitation but failed to send e-mail");
+      $this->log->log("warn", $this->user->getUserName($account_id)." 招待メールの送信が失敗しました。");
       $this->setErrorMessage($this->getErrorMsg('E0028'));
     }
     $this->setErrorMessage($this->getErrorMsg('E0029'));

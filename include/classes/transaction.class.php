@@ -389,10 +389,10 @@ class Transaction extends Base {
    * @return int Debit transaction ID or false
    **/
   public function createDebitMPRecord($account_id, $coin_address, $amount) {
-    return $this->createDebitRecord($account_id, $coin_address, $amount, 'Debit_MP');
+    return $this->createDebitRecord($account_id, $coin_address, $amount, '手動出金リクエスト');
   }
   public function createDebitAPRecord($account_id, $coin_address, $amount) {
-    return $this->createDebitRecord($account_id, $coin_address, $amount, 'Debit_AP');
+    return $this->createDebitRecord($account_id, $coin_address, $amount, '自動出金');
   }
   private function createDebitRecord($account_id, $coin_address, $amount, $type) {
     // Calculate and deduct txfee from amount
@@ -428,7 +428,7 @@ class Transaction extends Base {
     }
     // Notify user via  mail
     $aMailData['email'] = $this->user->getUserEmailById($account_id);
-    $aMailData['subject'] = $type . ' Completed';
+    $aMailData['subject'] = $type . 'が完了しました。';
     $aMailData['amount'] = $amount;
     if (!$this->notification->sendNotification($account_id, 'payout', $aMailData)) {
       $this->setErrorMessage('Failed to send notification email to users address: ' . $aMailData['email'] . 'ERROR: ' . $this->notification->getCronError());

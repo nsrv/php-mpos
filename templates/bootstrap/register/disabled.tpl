@@ -1,1 +1,1 @@
-<br /><center><p><font size="5px">We are currently not accepting new user registrations.</font></p></center>
+<br /><center><p><font size="5px">申し訳ありません。現在、新規ユーザー登録を受け付けていません。</font></p></center>

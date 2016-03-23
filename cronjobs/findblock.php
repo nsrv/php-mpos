@@ -161,7 +161,7 @@ if (empty($aAllBlocks)) {
           $finder = $user->getUserName($iAccountId);
           foreach ($aAccounts as $aData) {
             $aMailData['height'] = $aBlock['height'];
-            $aMailData['subject'] = 'New Block';
+            $aMailData['subject'] = '（通知）新規ブロックを発見';
             $aMailData['email'] = $user->getUserEmail($user->getUserName($aData['account_id']));
             $aMailData['shares'] = $iRoundShares;
             $aMailData['amount'] = $aBlock['amount'];

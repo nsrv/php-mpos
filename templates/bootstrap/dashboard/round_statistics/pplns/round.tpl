@@ -10,7 +10,7 @@
                   <p class="h5 up-more" id="b-nblock">{$NETWORK.block}</p>
                 </div>
                 <div class="circle-tile-number text-faded">
-                  <p class="h6">Current Block</p>
+                  <p class="h6">現在のブロック</p>
                 </div>
               </div>
             </div>
@@ -25,7 +25,7 @@
                   <p class="h5 up-more" id="b-roundprogress">{$ESTIMATES.percent|number_format:"2"}%</p>
                 </div>
                 <div class="circle-tile-number text-faded">
-                  <p class="h6">Of Expected Shares</p>
+                  <p class="h6">予測値に対する進捗状況</p>
                 </div>
               </div>
             </div>
@@ -40,7 +40,7 @@
                   <p class="h5 up-more" id="b-payout">{$GLOBAL.userdata.estimates.payout|number_format:$PRECISION}</p>
                 </div>
                 <div class="circle-tile-number text-faded">
-                  <p class="h6">{$GLOBAL.config.currency} Est. Earnings</p>
+                  <p class="h6">{$GLOBAL.config.currency}の予測収益</p>
                 </div>
               </div>
             </div>
@@ -55,7 +55,7 @@
                   <p class="h5 up-more" id="b-diff">{$NETWORK.difficulty|number_format:"8"}</p>
                 </div>
                 <div class="circle-tile-number text-faded">
-                  <p class="h6">Difficulty</p>
+                  <p class="h6">採掘難易度</p>
                 </div>
               </div>
             </div>
@@ -70,7 +70,7 @@
                   <p class="h5" id="b-nextdiff">{if $GLOBAL.nethashrate > 0}{$NETWORK.EstNextDifficulty|number_format:"8"}{else}n/a{/if}</p>
                 </div>
                 <div class="circle-tile-number text-faded">
-                  <p class="h6">Est Next Difficulty{if $GLOBAL.nethashrate > 0}<br/>Change in {$NETWORK.BlocksUntilDiffChange} Blocks{else}No Estimates{/if}</p>
+                  <p class="h6">次ブロックの予測難易度{if $GLOBAL.nethashrate > 0}<br/> {$NETWORK.BlocksUntilDiffChange} ブロックで変更されます。{else}No Estimates{/if}</p>
                 </div>
               </div>
             </div> 
@@ -85,7 +85,7 @@
                   <p class="h5 up-more" id="b-esttimeperblock">{$NETWORK.EstTimePerBlock|seconds_to_hhmmss}</p>
                 </div>
                 <div class="circle-tile-number text-faded">
-                  <p class="h6">Est. Avg. Time per Block</p>
+                  <p class="h6">ブロック生成間隔</p>
                 </div>
               </div>
             </div>

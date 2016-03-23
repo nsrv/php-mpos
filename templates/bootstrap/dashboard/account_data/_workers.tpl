@@ -2,13 +2,13 @@
         <table class="table table-bordered table-hover table-striped"> 
          <thead>
           <tr>
-            <th>Worker</th>
-            <th>Hashrate</th>
-            <th>Difficulty</th>
+            <th>ワーカー</th>
+            <th>ハッシュレート</th>
+            <th>採掘難易度</th>
           </tr>
           </thead>
           <tbody id="b-workers">
-            <td colspan="3" class="text-center">No worker information available</td>
+            <td colspan="3" class="text-center">利用可能なワーカー情報がありません。</td>
           </tbody>
           </tr>
         </table>

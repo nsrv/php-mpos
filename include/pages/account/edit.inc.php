@@ -13,20 +13,20 @@ $updating = (@$_POST['do']) ? 1 : 0;
 if ($user->isAuthenticated()) {
   if ($config['twofactor']['enabled']) {
     if ($config['twofactor']['options']['details'] OR $config['twofactor']['options']['changepw'] OR $config['twofactor']['options']['withdraw']) {
-      $popupmsg = 'E-mail confirmations are required for ';
+      $popupmsg = 'を行うためには、メール認証が必要です。 ';
       $popuptypes = array();
       if ($config['twofactor']['options']['details'] && $oldtoken_ea !== "") {
-        $popuptypes[] = 'editing your details';
+        $popuptypes[] = 'アカウント状態を更新';
         $ea_editable = $user->token->isTokenValid($_SESSION['USERDATA']['id'], $oldtoken_ea, 5);
         $ea_sent = $user->token->doesTokenExist('account_edit', $_SESSION['USERDATA']['id']);
       }
       if ($config['twofactor']['options']['changepw'] && $oldtoken_cp !== "") {
-        $popuptypes[] = 'changing your password';
+        $popuptypes[] = 'パスワードを変更';
         $cp_editable = $user->token->isTokenValid($_SESSION['USERDATA']['id'], $oldtoken_cp, 6);
         $cp_sent = $user->token->doesTokenExist('change_pw', $_SESSION['USERDATA']['id']);
       }
       if ($config['twofactor']['options']['withdraw'] && $oldtoken_wf !== "") {
-        $popuptypes[] = 'withdrawals';
+        $popuptypes[] = '出金';
         $wf_editable = $user->token->isTokenValid($_SESSION['USERDATA']['id'], $oldtoken_wf, 7);
         $wf_sent = $user->token->doesTokenExist('withdraw_funds', $_SESSION['USERDATA']['id']);
       }
@@ -49,7 +49,7 @@ if ($user->isAuthenticated()) {
       $ptc = 0;
       $ptcn = count($popuptypes);
       foreach ($popuptypes as $pt) {
-        if ($ptcn == 1) { $popupmsg.= $popuptypes[$ptc]; continue; }
+        if ($ptcn == 1) { $popupmsg = $popuptypes[$ptc].$popupmsg; continue; }
         if ($ptc !== ($ptcn-1)) {
           $popupmsg.= $popuptypes[$ptc].', ';
         } else {
@@ -75,7 +75,7 @@ if ($user->isAuthenticated()) {
   }
   else {
     if ( @$_POST['do'] && !$user->checkPin($_SESSION['USERDATA']['id'], @$_POST['authPin'])) {
-      $_SESSION['POPUP'][] = array('CONTENT' => 'Invalid PIN. ' . ($config['maxfailed']['pin'] - $user->getUserPinFailed($_SESSION['USERDATA']['id'])) . ' attempts remaining.', 'TYPE' => 'alert alert-danger');
+      $_SESSION['POPUP'][] = array('CONTENT' => '認証コードが無効です。　残り試行回数：' . ($config['maxfailed']['pin'] - $user->getUserPinFailed($_SESSION['USERDATA']['id'])) . '回', 'TYPE' => 'alert alert-danger');
     } else {
       if (isset($_POST['unlock']) && isset($_POST['utype'])) {
         $validtypes = array('account_edit','change_pw','withdraw_funds');
@@ -85,7 +85,7 @@ if ($user->isAuthenticated()) {
           if (!$config['csrf']['enabled'] || $config['csrf']['enabled'] && $csrftoken->valid) {
             $send = $user->sendChangeConfigEmail($ctype, $_SESSION['USERDATA']['id']);
             if ($send) {
-              $_SESSION['POPUP'][] = array('CONTENT' => 'A confirmation was sent to your e-mail, follow that link to continue', 'TYPE' => 'alert alert-success');
+              $_SESSION['POPUP'][] = array('CONTENT' => '電子メールを送信しました。メールに記載されているリンクをクリックしてメールアドレスを認証してください。', 'TYPE' => 'alert alert-success');
             } else {
               $_SESSION['POPUP'][] = array('CONTENT' => $user->getError(), 'TYPE' => 'alert alert-danger');
             }
@@ -112,7 +112,7 @@ if ($user->isAuthenticated()) {
         	    if (!$oPayout->isPayoutActive($_SESSION['USERDATA']['id'])) {
         	      if (!$config['csrf']['enabled'] || $config['csrf']['enabled'] && $csrftoken->valid) {
         	        if ($iPayoutId = $oPayout->createPayout($_SESSION['USERDATA']['id'], $oldtoken_wf)) {
-        	          $_SESSION['POPUP'][] = array('CONTENT' => 'Created new manual payout request with ID #' . $iPayoutId);
+        	          $_SESSION['POPUP'][] = array('CONTENT' => '手動の出金リクエストが送信されました。受付IDは #' . $iPayoutId . 'です。');
         	        } else {
         	          $_SESSION['POPUP'][] = array('CONTENT' => $iPayoutId->getError(), 'TYPE' => 'alert alert-danger');
         	        }
@@ -120,7 +120,7 @@ if ($user->isAuthenticated()) {
         	        $_SESSION['POPUP'][] = array('CONTENT' => $csrftoken->getErrorWithDescriptionHTML(), 'TYPE' => 'alert alert-warning');
         	      }
         	    } else {
-        	      $_SESSION['POPUP'][] = array('CONTENT' => 'You already have one active manual payout request.', 'TYPE' => 'alert alert-danger');
+        	      $_SESSION['POPUP'][] = array('CONTENT' => '既に手動出金のリクエストがされています。', 'TYPE' => 'alert alert-danger');
         	    }
         	  } else {
         	    $_SESSION['POPUP'][] = array('CONTENT' => 'Insufficient funds, you need more than ' . $config['txfee_manual'] . ' ' . $config['currency'] . ' to cover transaction fees', 'TYPE' => 'alert alert-danger');
@@ -134,9 +134,9 @@ if ($user->isAuthenticated()) {
             } else if (!$config['csrf']['enabled'] || $config['csrf']['enabled'] && $csrftoken->valid) {
               if ($user->updateAccount($_SESSION['USERDATA']['id'], $_POST['paymentAddress'], $_POST['payoutThreshold'], $_POST['donatePercent'], $_POST['email'], $_POST['timezone'], $_POST['is_anonymous'], $oldtoken_ea)) {
                 $_SESSION['USERDATA']['timezone'] = $_POST['timezone'];
-              	$_SESSION['POPUP'][] = array('CONTENT' => 'Account details updated', 'TYPE' => 'alert alert-success');
+              	$_SESSION['POPUP'][] = array('CONTENT' => 'アカウント情報を更新しました。', 'TYPE' => 'alert alert-success');
               } else {
-              	$_SESSION['POPUP'][] = array('CONTENT' => 'Failed to update your account: ' . $user->getError(), 'TYPE' => 'alert alert-danger');
+              	$_SESSION['POPUP'][] = array('CONTENT' => '申し訳ありません。アカウント情報を更新できませんでした。: ' . $user->getError(), 'TYPE' => 'alert alert-danger');
               }
             } else {
               $_SESSION['POPUP'][] = array('CONTENT' => $csrftoken->getErrorWithDescriptionHTML(), 'TYPE' => 'alert alert-warning');
@@ -148,7 +148,7 @@ if ($user->isAuthenticated()) {
               $_SESSION['POPUP'][] = array('CONTENT' => 'You have not yet unlocked password updates.', 'TYPE' => 'alert alert-danger');
             } else if (!$config['csrf']['enabled'] || $config['csrf']['enabled'] && $csrftoken->valid) {
               if ($user->updatePassword($_SESSION['USERDATA']['id'], $_POST['currentPassword'], $_POST['newPassword'], $_POST['newPassword2'], $oldtoken_cp)) {
-                $_SESSION['POPUP'][] = array('CONTENT' => 'Password updated', 'TYPE' => 'alert alert-success');
+                $_SESSION['POPUP'][] = array('CONTENT' => 'パスワードを変更しました。', 'TYPE' => 'alert alert-success');
               } else {
                 $_SESSION['POPUP'][] = array('CONTENT' => $user->getError(), 'TYPE' => 'alert alert-danger');
               }

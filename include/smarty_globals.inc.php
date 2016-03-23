@@ -185,13 +185,13 @@ if (@$_SESSION['USERDATA']['id']) {
 
   // Site-wide notifications, based on user events
   if ($aGlobal['userdata']['balance']['confirmed'] >= $config['ap_threshold']['max'])
-    $_SESSION['POPUP'][] = array('CONTENT' => 'You have exceeded the pools configured ' . $config['currency'] . ' warning threshold. Please initiate a transfer!', 'TYPE' => 'alert alert-danger');
+    $_SESSION['POPUP'][] = array('CONTENT' => 'アカウントの保有' . $config['currency'] . 'が閾値の' . $config['ap_threshold']['max'] . 'MONAを超えています。今すぐ出金を行い、自動出金の利用を検討してください。', 'TYPE' => 'alert alert-danger');
   if ($user->getUserFailed($_SESSION['USERDATA']['id']) > 0)
-    $_SESSION['POPUP'][] = array('CONTENT' => 'You have ' . $user->getUserFailed($_SESSION['USERDATA']['id']) . ' failed login attempts! <a href="?page=account&action=reset_failed">Reset Counter</a>', 'TYPE' => 'alert alert-danger');
+    $_SESSION['POPUP'][] = array('CONTENT' => 'このアカウントは' . $user->getUserFailed($_SESSION['USERDATA']['id']) . ' 回ログインに失敗しています。 　→<a href="?page=account&action=reset_failed">カウンターをリセット</a>', 'TYPE' => 'alert alert-danger');
 }
 
 if ($setting->getValue('maintenance'))
-  $_SESSION['POPUP'][] = array('CONTENT' => 'This pool is currently in maintenance mode.', 'TYPE' => 'alert alert-warning');
+  $_SESSION['POPUP'][] = array('CONTENT' => 'このプールは現在メンテナンス中です。', 'TYPE' => 'alert alert-warning');
 if ($motd = $setting->getValue('system_motd')) {
   if ($setting->getValue('system_motd_dismiss')) {
     $motd_dismiss = "yes";

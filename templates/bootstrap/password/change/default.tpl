@@ -13,13 +13,13 @@
       <div class="panel-body">
         <div class="form-group">
           <fieldset>
-            <label>New Password</label>
+            <label>新しいパスワードを入力してください。</label>
             <input class="form-control" type="password" name="newPassword" required>
           </fieldset>
         </div>
         <div class="form-group">
           <fieldset>
-            <label>Repeat New Password</label>
+            <label>新しいパスワードを再入力してください。</label>
             <input class="form-control" type="password" name="newPassword2" required>
           </fieldset>
         </div>

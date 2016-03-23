@@ -2,20 +2,20 @@
   <div class="col-lg-12">
     <div class="panel panel-info">
       <div class="panel-heading">
-        <i class="fa fa-credit-card fa-fw"></i> Round Transactions
+        <i class="fa fa-credit-card fa-fw"></i> ラウンドの採掘者
       </div>
       <div class="panel-body ">
         <div class="table-responsive">
           <table class="table table-striped table-bordered table-hover {if $ROUNDTRANSACTIONS}datatable{/if}">
             <thead>
               <tr>
-                <th>User Name</th>
-                <th>Round Shares</th>
-                <th>Round %</th>
-                <th>PPLNS Shares</th>
-                <th>PPLNS Round %</th>
-                <th>Variance</th>
-                <th>Amount</th>
+                <th>ユーザー名</th>
+                <th>ラウンドシェア</th>
+                <th>ラウンド割合（％）</th>
+                <th>PPLNSシェア</th>
+                <th>PPLNS割合（％）</th>
+                <th>分散</th>
+                <th>取得額</th>
               </tr>
             </thead>
             <tbody>

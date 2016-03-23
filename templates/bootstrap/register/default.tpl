@@ -13,57 +13,59 @@
       <input type="hidden" name="ctoken" value="{$CTOKEN|escape|default:""}">
       <input type="hidden" name="action" value="register">
       <div class="panel-heading">
-        <i class="fa fa-edit fa-fw"></i> Register new account
+        <i class="fa fa-edit fa-fw"></i> アカウントの新規作成
       </div>
       <div class="panel-body">
         <div class="form-group">
-          <label>Username</label>
+          <label>ユーザー名</label>
           <div class="input-group  input-group-sm">
             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-            <input type="text" class="form-control" name="username" placeholder="Username" value="{$smarty.post.username|escape|default:""}" size="15" maxlength="20" required>
+            <input type="text" class="form-control" name="username" placeholder="ユーザー名（半角英数字）" value="{$smarty.post.username|escape|default:""}" size="15" maxlength="20" required>
           </div>
           {if $GLOBAL.coinaddresscheck|default:"1"}
-          <label>Coin Address</label>
+          <label>ウォレットアドレス</label>
           <div class="input-group input-group-sm">
             <span class="input-group-addon"><i class="fa fa-money fa-fw"></i></span>
-            <input type="text" name="coinaddress" placeholder="Coin Address" class="form-control" value="{$smarty.post.coinaddress|escape|default:""}" size="15" required>
+            <input type="text" name="coinaddress" placeholder="出金先のウォレットのアドレス" class="form-control" value="{$smarty.post.coinaddress|escape|default:""}" size="15" required>
           </div>
           {/if}
-          <label>Password</label> (<span id="pw_strength">Strength</span>)
+          <label>メールアドレス</label>
+          <div class="input-group input-group-sm">
+            <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+            <input type="text" name="email1" placeholder="Eメールアドレス" class="form-control" value="{$smarty.post.email1|escape|default:""}" size="15" required>
+          </div>
+          <div class="input-group input-group-sm">
+            <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+            <input type="text" class="form-control" name="email2" placeholder="確認のために再入力" value="{$smarty.post.email2|escape|default:""}" size="15" required>
+          </div>
+          
+          <label>パスワード</label> (<span id="pw_strength">Strength</span>)
           <div class="input-group input-group-sm">
             <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-            <input type="password" class="form-control" name="password1" placeholder="Password" value="" size="15" maxlength="100" id="pw_field" required>
+            <input type="password" class="form-control" name="password" placeholder="パスワード" value="" size="15" maxlength="100" id="pw_field" required>
           </div>
           <span id="pw_match"></span>
           <div class="input-group input-group-sm">
             <span class="input-group-addon" id="pw_match"><i class="fa fa-key fa-fw"></i></span>
-            <input type="password" class="form-control" name="password2" placeholder="Repeat Password" value="" size="15" maxlength="100" id="pw_field2" required>
+            <input type="password" class="form-control" name="password2" placeholder="確認のために再入力" value="" size="15" maxlength="100" id="pw_field2" required>
           </div>
-          <label>Email</label>
-          <div class="input-group input-group-sm">
-            <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-            <input type="text" name="email1" placeholder="Email" class="form-control" value="{$smarty.post.email1|escape|default:""}" size="15" required>
-          </div>
-          <div class="input-group input-group-sm">
-            <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-            <input type="text" class="form-control" name="email2" placeholder="Repeat Email" value="{$smarty.post.email2|escape|default:""}" size="15" required>
-          </div>
-          <label>PIN</label>
-          <font size="1">Four digit number. <b>Remember this pin!</b></font>
+
+          <label>認証コード（PIN）</label>
+          <font color="#FF0000" size="1">忘れないようにご注意ください。</font>
           <div class="input-group input-group-sm">
             <span class="input-group-addon"><i class="fa fa-shield fa-fw"></i></span>
-            <input type="password" class="form-control" name="pin" placeholder="PIN" value="" size="4" maxlength="4" required>   
+            <input type="password" class="form-control" name="pin" placeholder="数字4文字" value="" size="4" maxlength="4" required>   
           </div>
           <div class="input-group input-group-sm">
             <label>
-              <input type="checkbox" value="1" name="tac" id="tac"> I Accept The <a data-toggle="modal" data-target="#TAC">Terms and Conditions</a>
+              <input type="checkbox" value="1" name="tac" id="tac">　　<a data-toggle="modal" data-target="#TAC">利用規約</a>を読み同意します。
             </label>
           </div>
         </div>
         <center>{nocache}{$RECAPTCHA|default:"" nofilter}{/nocache}</center>
       </div>
       <div class="panel-footer">
-        <input type="submit" value="Register" class="btn btn-success btn-sm">
+        <input type="submit" value="新規登録" class="btn btn-success btn-sm">
       </div>
     </form>
   </div>
@@ -74,13 +76,13 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="TACLabel">Terms and Conditions</h4>
+          <h4 class="modal-title" id="TACLabel">利用規約</h4>
         </div>
         <div class="modal-body">
           {include file="tac/content.tpl"}
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">戻る</button>
         </div>
       </div>
     </div>

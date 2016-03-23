@@ -9,7 +9,7 @@
       background : "#ffffff",
       foreground : "#000000",
       width : 250,
-      height: 250 
+      height: 250
     });
   });
   {/literal}
@@ -18,10 +18,10 @@
   <div class="col-lg-4">
     <div class="panel panel-info">
       <div class="panel-heading">
-        <i class="fa fa-qrcode fa-fw"></i> API String
+        <i class="fa fa-qrcode fa-fw"></i> APIのQRコード
       </div>
       <div class="panel-body text-center">
-        <p>This code will allow you to import the full API string into your mobile application.</p>
+        <p>モバイルアプリをご利用の場合、APIのインポートにこのQRコードを使用してください。</p>
         <div id="qrcodeholder"></div>
       </div>
     </div>

@@ -1,16 +1,16 @@
   <div class="col-lg-6">
     <div class="panel panel-info">
       <div class="panel-heading">
-        <i class="fa fa-desktop fa-fw"></i> Blocks found by own Workers
+        <i class="fa fa-desktop fa-fw"></i> ブロックを発見した自分のワーカー
       </div>
       <div class="panel-body no-padding table-responsive">
         <table class="table table-striped table-bordered table-hover">
           <thead>
             <tr>
-              <th>Rank</th>
-              <th>Worker</th>
-              <th>Blocks</th>
-              <th>Coins Generated</th>
+              <th>順位</th>
+              <th>ワーカー名</th>
+              <th>ブロックの発見数</th>
+              <th>採掘額（MONA）</th>
             </tr>
           </thead>
           <tbody>

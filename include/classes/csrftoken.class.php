@@ -73,7 +73,7 @@ class CSRFToken Extends Base {
    * @param string $dowhat What will be put in the string "Simply $dowhat again to...", default is try
    */
   public static function getErrorWithDescriptionHTML($tokentype="", $dowhat="try") {
-    return ($tokentype !== "") ? "$tokentype token expired, please try again ".self::getDescriptionImageHTML($dowhat) : "Token expired, please try again ".self::getDescriptionImageHTML($dowhat);
+    return ($tokentype !== "") ? "$tokentype token expired, please try again ".self::getDescriptionImageHTML($dowhat) : "トークンの有効期限が切れています。お手数ですが、もう一度お試しください。 "/*.self::getDescriptionImageHTML($dowhat)*/;
   }
   
   /**

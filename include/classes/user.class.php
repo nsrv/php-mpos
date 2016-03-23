@@ -186,22 +186,22 @@ class User extends Base {
     $this->debug->append("STA " . __METHOD__, 4);
     $this->debug->append("Checking login for $username with password $password", 2);
     if (empty($username) || empty($password)) {
-      $this->setErrorMessage("Invalid username or password.");
+      $this->setErrorMessage("ユーザー名またはパスワードが間違っています。");
       return false;
     }
     if (!filter_var($username, FILTER_VALIDATE_EMAIL)) {
       $this->debug->append("Not an e-mail address, rejecting login", 2);
-      $this->setErrorMessage("Please login with your e-mail address");
+      $this->setErrorMessage("メールアドレスでログインをしてください。");
       return false;
     } else {
       $this->debug->append("Username is an e-mail: $username", 2);
       if (!$username = $this->getUserNameByEmail($username)) {
-        $this->setErrorMessage("Invalid username or password.");
+        $this->setErrorMessage("ユーザー名またはパスワードが間違っています。");
         return false;
       }
     }
     if ($this->isLocked($this->getUserId($username))) {
-      $this->setErrorMessage('Account locked. Please Check your Email for instructions to unlock.');
+      $this->setErrorMessage('アカウントがロックされています。解除の手順については、メールをご確認ください。');
       return false;
     }
     if ($this->checkUserPassword($username, $password)) {
@@ -234,7 +234,7 @@ class User extends Base {
           // seems to be active, let's send it
           $aDataN['username'] = $username;
           $aDataN['email'] = $this->getUserEmail($username);
-          $aDataN['subject'] = 'Successful login notification';
+          $aDataN['subject'] = '（通知）ログイン成功';
           $aDataN['LOGINIP'] = $this->getCurrentIP();
           $aDataN['LOGINUSER'] = $username;
           $aDataN['LOGINTIME'] = date('m/d/y H:i:s');
@@ -243,7 +243,7 @@ class User extends Base {
         return true;
       }
     }
-    $this->setErrorMessage("Invalid username or password");
+    $this->setErrorMessage("ユーザー名またはパスワードが間違っています。");
     $this->log->log('error', "Authentication failed for $username");
     if ($id = $this->getUserId($username)) {
       $this->incUserFailed($id);
@@ -292,7 +292,7 @@ class User extends Base {
         $aData['token'] = $token;
         $aData['username'] = $username;
         $aData['email'] = $this->getUserEmail($username);
-        $aData['subject'] = 'Account auto-locked';
+        $aData['subject'] = 'アカウントが自動ロックされました。';
         $this->mail->sendMail('notifications/locked', $aData);
       }
       $this->logoutUser();
@@ -312,7 +312,7 @@ class User extends Base {
     $aData['email'] = $email;
     $aData['pin'] = $newpin;
     $newpin = $this->getHash($newpin, HASH_VERSION, bin2hex(openssl_random_pseudo_bytes(32)));
-    $aData['subject'] = 'PIN Reset Request';
+    $aData['subject'] = '認証コード（PIN）のリセット';
     $stmt = $this->mysqli->prepare("UPDATE $this->table SET pin = ? WHERE ( id = ? AND pass = ? )");
     if ($this->checkStmt($stmt) && $stmt->bind_param('sis', $newpin, $userID, $password_hash) && $stmt->execute()) {
       if ($stmt->errno == 0 && $stmt->affected_rows === 1) {
@@ -321,13 +321,13 @@ class User extends Base {
           return true;
         } else {
           $this->log->log("warn", "$username request a pin reset but failed to send mail");
-          $this->setErrorMessage('Unable to send mail to your address');
+          $this->setErrorMessage('メールを送信できませんでした。');
           return false;
         }
       }
     }
     $this->log->log("warn", "$username incorrect pin reset attempt");
-    $this->setErrorMessage( 'Unable to generate PIN, current password incorrect?' );
+    $this->setErrorMessage( '認証コードを生成できません。現在のパスワードが間違っていますが？' );
     return false;
 }
 
@@ -382,13 +382,13 @@ class User extends Base {
       $aData['email'] = $this->getUserEmail($aData['username']);
       switch ($strType) {
       	case 'account_edit':
-      	  $aData['subject'] = 'Account detail change confirmation';
+      	  $aData['subject'] = 'アカウント詳細の変更の確認';
       	  break;
       	case 'change_pw':
-      	  $aData['subject'] = 'Account password change confirmation';
+      	  $aData['subject'] = 'パスワード変更の確認';
       	  break;
       	case 'withdraw_funds':
-      	  $aData['subject'] = 'Manual payout request confirmation';
+      	  $aData['subject'] = '手動出金リクエストの確認';
       	  break;
       	default:
       	  $aData['subject'] = '';
@@ -419,11 +419,11 @@ class User extends Base {
   public function updatePassword($userID, $current, $new1, $new2, $strToken) {
     $this->debug->append("STA " . __METHOD__, 4);
     if ($new1 !== $new2) {
-      $this->setErrorMessage( 'New passwords do not match' );
+      $this->setErrorMessage( '新しいパスワードが一致しません。お手数ですが、もう一度お試しください。' );
       return false;
     }
     if ( strlen($new1) < 8 ) {
-      $this->setErrorMessage( 'New password is too short, please use more than 8 chars' );
+      $this->setErrorMessage( 'パスワードが短すぎます。8文字以上で入力してください。' );
       return false;
     }
     $strPasswordHash = $this->getUserPasswordHashById($userID);
@@ -477,41 +477,41 @@ class User extends Base {
     $donate = round($donate, 2);
     // number validation checks
     if (!is_numeric($threshold)) {
-      $this->setErrorMessage('Invalid input for auto-payout');
+      $this->setErrorMessage('自動出金の金額が無効です。');
       return false;
     } else if ($threshold < $this->config['ap_threshold']['min'] && $threshold != 0) {
-      $this->setErrorMessage('Threshold below configured minimum of ' . $this->config['ap_threshold']['min']);
+      $this->setErrorMessage('自動出金の金額は' . $this->config['ap_threshold']['min'] . 'MONA以上を設定する必要があります。');
       return false;
     } else if ($threshold > $this->config['ap_threshold']['max']) {
-      $this->setErrorMessage('Threshold above configured maximum of ' . $this->config['ap_threshold']['max']);
+      $this->setErrorMessage('自動出金の最大値は' . $this->config['ap_threshold']['max'] . 'MONAです。');
       return false;
     }
     if (!is_numeric($donate)) {
-      $this->setErrorMessage('Invalid input for donation');
+      $this->setErrorMessage('寄付額の入力が無効です。');
       return false;
     } else if ($donate < $this->config['donate_threshold']['min'] && $donate != 0) {
       $this->setErrorMessage('Donation below allowed ' . $this->config['donate_threshold']['min'] . '% limit');
       return false;
     } else if ($donate > 100) {
-      $this->setErrorMessage('Donation above allowed 100% limit');
+      $this->setErrorMessage('寄付額の上限は１００％です。');
       return false;
     }
     if ($email != 'hidden' && $email != NULL && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      $this->setErrorMessage('Invalid email address');
+      $this->setErrorMessage('無効なメールアドレスです。');
       return false;
     }
     if (!empty($address)) {
       if ($address != $this->coin_address->getCoinAddress($userID) && $this->coin_address->existsCoinAddress($address)) {
-        $this->setErrorMessage('Address is already in use');
+        $this->setErrorMessage('ウォレットアドレスは既に使用されています。');
         return false;
       }
       if ($this->bitcoin->can_connect() === true) {
         if (!$this->bitcoin->validateaddress($address)) {
-          $this->setErrorMessage('Invalid coin address');
+          $this->setErrorMessage('ウォレットアドレスが無効です。');
           return false;
         }
       } else {
-        $this->setErrorMessage('Unable to connect to RPC server for coin address validation');
+        $this->setErrorMessage('コインアドレスの検証サーバーに接続できません。');
         return false;
       }
     } else {
@@ -559,7 +559,7 @@ class User extends Base {
       }
     }
     // Catchall
-    $this->setErrorMessage('Failed to update your account');
+    $this->setErrorMessage('アカウント情報を更新できませんでした。');
     $this->debug->append('Account update failed: ' . $this->mysqli->error);
     return false;
   }
@@ -728,21 +728,21 @@ class User extends Base {
       return false;
     }
     if (strlen($username) > 40) {
-      $this->setErrorMessage('Username exceeding character limit');
+      $this->setErrorMessage('ユーザー名が長すぎます。');
       return false;
     }
     if (!is_null($coinaddress)) {
       if ($this->coin_address->existsCoinAddress($coinaddress)) {
-        $this->setErrorMessage('Coin address is already taken');
+        $this->setErrorMessage('入力いただいたウォレットのアドレスは既に使用されています。');
         return false;
       }
       if (!$this->bitcoin->validateaddress($coinaddress)) {
-        $this->setErrorMessage('Coin address is not valid');
+        $this->setErrorMessage('ウォレットのアドレスが無効です。');
         return false;
       }
     }
     if (preg_match('/[^a-z_\-0-9]/i', $username)) {
-      $this->setErrorMessage('Username may only contain alphanumeric characters');
+      $this->setErrorMessage('ユーザー名には半角英数字のみ使用できます。');
       return false;
     }
     if ($this->getEmail($email1)) {
@@ -750,28 +750,28 @@ class User extends Base {
       return false;
     }
     if (strlen($password1) < 8) {
-      $this->setErrorMessage( 'Password is too short, minimum of 8 characters required' );
+      $this->setErrorMessage( 'パスワードが短すぎます。8文字以上で入力してください。' );
       return false;
     }
     if ($password1 !== $password2) {
-      $this->setErrorMessage( 'Password do not match' );
+      $this->setErrorMessage( 'パスワードが一致していません。' );
       return false;
     }
     if (empty($email1) || !filter_var($email1, FILTER_VALIDATE_EMAIL)) {
-      $this->setErrorMessage( 'Invalid e-mail address' );
+      $this->setErrorMessage( '無効なメールアドレスです。' );
       return false;
     }
     if ($email1 !== $email2) {
-      $this->setErrorMessage( 'E-mail do not match' );
+      $this->setErrorMessage( 'メールアドレスが一致しません。' );
       return false;
     }
     if (!is_numeric($pin) || strlen($pin) > 4 || strlen($pin) < 4) {
-      $this->setErrorMessage( 'Invalid PIN' );
+      $this->setErrorMessage( '認証コード（PIN）が無効です。' );
       return false;
     }
     if (isset($strToken) && !empty($strToken)) {
       if ( ! $aToken = $this->token->getToken($strToken, 'invitation')) {
-        $this->setErrorMessage('Unable to find token');
+        $this->setErrorMessage('トークンが見つかりません。');
         return false;
       }
       // Circle dependency, so we create our own object here
@@ -822,7 +822,7 @@ class User extends Base {
           $aData['username'] = $username_clean;
           $aData['token'] = $token;
           $aData['email'] = $email1;
-          $aData['subject'] = 'E-Mail verification';
+          $aData['subject'] = 'メールアドレスの確認';
           if (!$this->mail->sendMail('register/confirm_email', $aData)) {
             $this->setErrorMessage('Unable to request email confirmation: ' . $this->mail->getError());
             return false;
@@ -840,7 +840,7 @@ class User extends Base {
       $this->setErrorMessage( 'Unable to register' );
       $this->debug->append('Failed to insert user into DB: ' . $this->mysqli->error);
       echo $this->mysqli->error;
-      if ($stmt->sqlstate == '23000') $this->setErrorMessage( 'Username or email already registered' );
+      if ($stmt->sqlstate == '23000') $this->setErrorMessage( 'ユーザー名またはメールアドレスが既に登録されています。' );
       return false;
     }
     return false;
@@ -857,11 +857,11 @@ class User extends Base {
     $this->debug->append("STA " . __METHOD__, 4);
     if ($aToken = $this->token->getToken($token, 'password_reset')) {
       if ($new1 !== $new2) {
-        $this->setErrorMessage( 'New passwords do not match' );
+        $this->setErrorMessage( '新しいパスワードが一致しません。もう一度ご入力ください。' );
         return false;
       }
       if ( strlen($new1) < 8 ) { 
-        $this->setErrorMessage( 'New password is too short, please use more than 8 chars' );
+        $this->setErrorMessage( 'パスワードが短すぎます。8文字以上で入力してください。' );
         return false;
       }
       $new_hash = $this->getHash($new1, HASH_VERSION, bin2hex(openssl_random_pseudo_bytes(32)));
@@ -870,13 +870,13 @@ class User extends Base {
         if ($this->token->deleteToken($aToken['token'])) {
           return true;
         } else {
-          $this->setErrorMessage('Unable to invalidate used token');
+          $this->setErrorMessage('使用済みのトークンを無効にできません。');
         }
       } else {
         $this->setErrorMessage('Unable to set new password or you chose the same password. Please use a different one.');
       }
     } else {
-      $this->setErrorMessage('Invalid token: ' . $this->token->getError());
+      $this->setErrorMessage('トークンが無効です。: ' . $this->token->getError());
     }
     $this->debug->append('Failed to update password:' . $this->mysqli->error);
     return false;
@@ -897,7 +897,7 @@ class User extends Base {
     if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
       $this->debug->append("Username is an e-mail: $username", 2);
       if (!$username = $this->getUserNameByEmail($username)) {
-        $this->setErrorMessage("Invalid username or password.");
+        $this->setErrorMessage("ユーザー名またはパスワードが間違っています。");
         return false;
       }
     }
@@ -910,7 +910,7 @@ class User extends Base {
       return false;
     }
     $aData['username'] = $this->getUserName($this->getUserId($username, true));
-    $aData['subject'] = 'Password Reset Request';
+    $aData['subject'] = 'パスワードリセットのリクエスト';
     if ($_SERVER['REMOTE_ADDR'] !== $this->getUserIp($this->getUserId($username, true))) {
       $this->log->log("warn", "$username requested password reset, saved IP is [".$this->getUserIp($this->getUserId($username, true))."]");
     } else {

@@ -2,23 +2,23 @@
   <div class="col-lg-12">
     <div class="panel panel-info">
       <div class="panel-heading">
-        <i class="fa fa-tasks fa-fw"></i> Last {$BLOCKLIMIT} Blocks Found
+        <i class="fa fa-tasks fa-fw"></i> ブロックの発見履歴（最新の{$BLOCKLIMIT}件）
       </div>
       <div class="panel-body no-padding">
         <div class="table-responsive">
           <table class="table table-striped table-bordered table-hover">
             <thead>
               <tr>
-                <th class="text-center">Block</th>
-                <th class="text-center">Validity</th>
-                <th class="text-left">Finder</th>
-                <th class="text-right">Time</th>
-                <th class="text-right">Difficulty</th>
-                <th class="text-right">Amount</th>
-                <th class="text-right">Expected Shares</th>
-                {if $GLOBAL.config.payout_system == 'pplns'}<th class="text-right">PPLNS Shares</th>{/if}
-                <th class="text-right">Actual Shares</th>
-                <th  class="text-right">Percentage</th>
+                <th class="text-center">ブロック番号</th>
+                <th class="text-center">状態</th>
+                <th class="text-center">ユーザー名</th>
+                <th class="text-right">発見時刻</th>
+                <th class="text-right">難易度</th>
+                <th class="text-right">MONA生成額</th>
+                <th class="text-right">予測シェア</th>
+                {if $GLOBAL.config.payout_system == 'pplns'}<th class="text-right">PPLNSシェア</th>{/if}
+                <th class="text-right">実際のシェア</th>
+                <th  class="text-right">予測に対する割合</th>
               </tr>
             </thead>
             <tbody>
@@ -38,11 +38,11 @@
               {/if}
               <td class="text-center">
               {if $BLOCKSFOUND[block].confirmations >= $GLOBAL.confirmations}
-                <span class="label label-success">Confirmed</span>
+                <span class="label label-success">検証済み</span>
               {else if $BLOCKSFOUND[block].confirmations == -1}
-                <span class="label label-danger">Orphan</span>
+                <span class="label label-danger">無効</span>
               {else}
-                <span class="label label-warning">{$GLOBAL.confirmations - $BLOCKSFOUND[block].confirmations} left</span>
+                <span class="label label-warning">検証中（残り{$GLOBAL.confirmations - $BLOCKSFOUND[block].confirmations}ブロック）</span>
               {/if}
               </td>
                 <td>{if $BLOCKSFOUND[block].is_anonymous|default:"0" == 1 && $GLOBAL.userdata.is_admin|default:"0" == 0}anonymous{else}{$BLOCKSFOUND[block].finder|default:"unknown"|escape}{/if}</td>
@@ -64,7 +64,7 @@
               </tr>
               {/section}
               <tr>
-                <td colspan="6"><b>Totals</b></td>
+                <td colspan="6"><b>合計</b></td>
                 <td class="text-right">{$totalexpectedshares|number_format}</td>
                 {if $GLOBAL.config.payout_system == 'pplns'}
                 <td class="text-right">{$pplnsshares|number_format}</td>
@@ -77,7 +77,7 @@
         </div>
       </div>
       <div class="panel-footer">
-        <h6>{if $GLOBAL.config.payout_system != 'pps'}Round Earnings are not credited until <font class="confirmations">{$GLOBAL.confirmations}</font> confirms.{/if}</h6>
+        <h6>{if $GLOBAL.config.payout_system != 'pps'}・採掘したMONAは <font class="confirmations">{$GLOBAL.confirmations}</font> ブロック検証されるまで入金されません。{/if}</h6>
       </div>
     </div>
   </div>

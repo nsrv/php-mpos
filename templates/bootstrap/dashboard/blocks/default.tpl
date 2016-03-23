@@ -2,20 +2,20 @@
   <div class="col-lg-12">
     <div class="panel panel-info">
       <div class="panel-heading">
-        <h4 class="panel-title"><i class="fa fa-desktop fa-fw"></i> Last Found Blocks</h4>
+        <h4 class="panel-title"><i class="fa fa-desktop fa-fw"></i> ブロックの発見履歴</h4>
       </div>
       <div class="panel-body no-padding table-responsive">
         <table class="table table-bordered table-hover table-striped"> 
          <thead>
           <tr>
-            <th class="text-right">Height</th>
-            <th class="text-center">Finder</th>
-            <th class="text-right">Time</th>
-            <th class="text-right">Difficulty</th>
-            <th class="text-right">Amount</th>
-            <th class="text-right">Expected Shares</th>
-            <th class="text-right">Actual Shares</th>
-            <th class="text-right">Percentage</th>
+            <th class="text-right">ブロック番号</th>
+            <th class="text-center">ユーザー名</th>
+            <th class="text-right">発見時刻</th>
+            <th class="text-right">難易度</th>
+            <th class="text-right">MONA生成額</th>
+            <th class="text-right">予測シェア</th>
+            <th class="text-right">実際のシェア</th>
+            <th class="text-right">予測に対する割合</th>
           </tr>
           </thead>
           <tbody id="b-blocks">

@@ -6,32 +6,32 @@
   <div class="col-lg-6">
     <div class="panel panel-info">
       <div class="panel-heading">
-        <i class="fa fa-edit fa-fw"></i> Account Details
+        <i class="fa fa-edit fa-fw"></i> アカウントの設定
       </div>
       <div class="panel-body">
         <div class="row">
           <div class="col-lg-12">
             <div class="form-group">
-              <label>Username</label>
+              <label>ユーザーネーム</label>
               <input class="form-control" type="text" value="{$GLOBAL.userdata.username|escape}" disabled />
             </div>
             <div class="form-group">
-              <label>User Id</label>
+              <label>ユーザーID</label>
               <input class="form-control" type="text" value="{$GLOBAL.userdata.id}" disabled />
             </div>
             {if !$GLOBAL.website.api.disabled}
             <div class="form-group">
-              <label>API Key</label>
+              <label>API キー</label>
               <br>
               <a href="{$smarty.server.SCRIPT_NAME}?page=api&action=getuserstatus&api_key={$GLOBAL.userdata.api_key}&id={$GLOBAL.userdata.id}">{$GLOBAL.userdata.api_key}</a>
             </div>
             {/if}
             <div class="form-group">
-              <label>E-Mail</label>
+              <label>メールアドレス</label>
               {nocache}<input class="form-control" type="text" name="email" value="hidden" size="20" {if $GLOBAL.twofactor.enabled && $GLOBAL.twofactor.options.details && !$DETAILSUNLOCKED}id="disabledInput" disabled{/if}/>{/nocache}
             </div>
             <div class="form-group">
-              <label>Timezone</label>
+              <label>タイムゾーン</label>
               {nocache}
               <select class="form-control select-mini" name="timezone" {if $GLOBAL.twofactor.enabled && $GLOBAL.twofactor.options.details && !$DETAILSUNLOCKED}id="disabledInput" disabled{/if}>
                 {html_options options=$TIMEZONES selected=$GLOBAL.userdata.timezone}
@@ -39,31 +39,30 @@
               {/nocache}
             </div>
             <div class="form-group">
-              <label>Payment Address</label>
+              <label>出金先のアドレス</label>
               {nocache}<input class="form-control" type="text" name="paymentAddress" value="{$smarty.request.paymentAddress|default:$GLOBAL.userdata.coin_address|escape}" size="40" {if $GLOBAL.twofactor.enabled && $GLOBAL.twofactor.options.details && !$DETAILSUNLOCKED}id="disabledInput" disabled{/if}/>{/nocache}
             </div>
             <div class="form-group">
-              <label>Donation Percentage</label>
-              <font size="1"> Donation amount in percent ({$DONATE_THRESHOLD.min} - 100%)</font>
+              <label>プールへの寄付</label>
+              <font size="1"> パーセントで指定をお願いします。 ({$DONATE_THRESHOLD.min} - 100%)</font>
               {nocache}<input class="form-control" type="text" name="donatePercent" value="{$smarty.request.donatePercent|default:$GLOBAL.userdata.donate_percent|escape|number_format:"2"}" size="4" {if $GLOBAL.twofactor.enabled && $GLOBAL.twofactor.options.details && !$DETAILSUNLOCKED}id="disabledInput" disabled{/if}/>{/nocache}
             </div>
             <div class="form-group">
-              <label>Automatic Payout Threshold</label>
+              <label>自動出金</label>
               </br>
-              <font size="1">{$GLOBAL.config.ap_threshold.min} - {$GLOBAL.config.ap_threshold.max} {$GLOBAL.config.currency}. Set to '0' for no auto payout.{if $GLOBAL.config.txfee_auto > 0} A {if $GLOBAL.config.txfee_auto > 0.00001}{$GLOBAL.config.txfee_auto}{else}{$GLOBAL.config.txfee_auto|number_format:"8"}{/if} {$GLOBAL.config.currency} TX fee will apply <span id="tt"><img width="15px" height="15px" title="This {if $GLOBAL.config.txfee_auto > 0.00001}{$GLOBAL.config.txfee_auto}{else}{$GLOBAL.config.txfee_auto|number_format:"8"}{/if} automatic payment transaction fee is a network fee and goes back into the network not the pool." src="site_assets/bootstrap/images/questionmark.png"></span>{/if}</font>
+              <font size="1">{$GLOBAL.config.ap_threshold.min}～{$GLOBAL.config.ap_threshold.max} {$GLOBAL.config.currency}の間で指定できます 0を指定すると自動で出金されません。{if $GLOBAL.config.txfee_auto > 0} A {if $GLOBAL.config.txfee_auto > 0.00001}{$GLOBAL.config.txfee_auto}{else}{$GLOBAL.config.txfee_auto|number_format:"8"}{/if} {$GLOBAL.config.currency} TX fee will apply <span id="tt"><img width="15px" height="15px" title="This {if $GLOBAL.config.txfee_auto > 0.00001}{$GLOBAL.config.txfee_auto}{else}{$GLOBAL.config.txfee_auto|number_format:"8"}{/if} automatic payment transaction fee is a network fee and goes back into the network not the pool." src="site_assets/bootstrap/images/questionmark.png"></span>{/if}</font>
               </br>
               <input class="form-control" type="text" name="payoutThreshold" value="{nocache}{$smarty.request.payoutThreshold|default:$GLOBAL.userdata.ap_threshold|escape}{/nocache}" size="{$GLOBAL.config.ap_threshold.max|strlen}" maxlength="{$GLOBAL.config.ap_threshold.max|strlen}" {if $GLOBAL.twofactor.enabled && $GLOBAL.twofactor.options.details && !$DETAILSUNLOCKED}id="disabledInput" disabled{/if}/>
             </div>
             <div class="form-group">
-              <label>Anonymous Account</label>
+              <label>アカウント名を隠す</label>
               <input type="hidden" name="is_anonymous" value="0" />
               <input type="checkbox" class="switch" data-size="mini"  name="is_anonymous" id="is_anonymous" value="1" {if $GLOBAL.userdata.is_anonymous}checked{/if} {if $GLOBAL.twofactor.enabled && $GLOBAL.twofactor.options.details && !$DETAILSUNLOCKED}id="disabledInput" disabled{/if}/>
               </br>
-              <font size="1">Hide username on website from others. Admins can still get your user information.</font>
+              <font size="1">ONにすると統計のアカウント名が匿名（Anonyomus）になります。</font>
             </div>
             <div class="form-group">
-              <label>4 Digit PIN</label>
-              <font size="1">The 4 digit PIN you chose when registering</font>
+              <label>認証コード（PIN）</label>
               <input class="form-control" type="password" name="authPin" size="4" maxlength="4">
             </div>
           </div>
@@ -83,7 +82,7 @@
       <input type="submit" value="Unlock" class="btn btn-warning btn-sm" name="unlock">
       {/if}
       {else}
-      <input type="submit" value="Update Account" class="btn btn-success btn-sm">
+      <input type="submit" value="アカウントを更新" class="btn btn-success btn-sm">
       {/if}
       {/nocache}
       </div>

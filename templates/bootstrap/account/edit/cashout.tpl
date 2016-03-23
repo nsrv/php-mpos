@@ -6,7 +6,7 @@
   <div class="col-lg-6">
     <div class="panel panel-info">
       <div class="panel-heading">
-        <i class="fa fa-money fa-fw"></i> Cash Out
+        <i class="fa fa-money fa-fw"></i> 出金
       </div>
       <div class="panel-body">
         <div class="row">
@@ -16,19 +16,22 @@
                 {if $GLOBAL.config.txfee_manual > 0}Please note: a {if $GLOBAL.config.txfee_manual > 0.00001}{$GLOBAL.config.txfee_manual}{else}{$GLOBAL.config.txfee_manual|number_format:"8"}{/if} {$GLOBAL.config.currency} transaction will apply when processing "On-Demand" manual payments <span id="tt"><img width="15px" height="15px" title="This {if $GLOBAL.config.txfee_manual > 0.00001}{$GLOBAL.config.txfee_manual}{else}{$GLOBAL.config.txfee_manual|number_format:"8"}{/if} manual payment transaction fee is a network fee and goes back into the network not the pool." src="site_assets/bootstrap/images/questionmark.png"></span>{/if}
               </p>
               <p style="padding-left:3px; padding-redight:30px; font-size:10px;">
-                Minimum Cashout: {$GLOBAL.config.mp_threshold} {$GLOBAL.config.currency}
+                {$GLOBAL.config.mp_threshold} {$GLOBAL.config.currency}	以上で出金できます。
               </p>
+				{if $GLOBAL.twofactor.enabled && $GLOBAL.twofactor.options.withdraw && $WITHDRAWSENT == 0 && $WITHDRAWUNLOCKED == 0}
+        			<font color="#FF0000">変更するには、認証コード（PIN）を入力してメール認証をする必要があります。</font>
+        		{/if}
             </div>
             <div class="form-group">
-              <label>Account Balance</label>
+              <label>アカウント残高</label>
               {nocache}<input class="form-control" id="disabledInput" type="text" value="{$GLOBAL.userdata.balance.confirmed|escape}" {$GLOBAL.config.currency} disabled />{/nocache}
             </div>
             <div class="form-group">
-              <label>Payout to</label>
+              <label>送金先のアドレス</label>
               {nocache}<input class="form-control" id="disabledInput" type="text" value="{$GLOBAL.userdata.coin_address|escape}" disabled />{/nocache}
             </div>
             <div class="form-group">
-              <label>4 Digit PIN</label>
+              <label>認証コード（PIN）</label>
               <input class="form-control" type="password" name="authPin" size="4" maxlength="4" />
             </div>
           </div>
@@ -41,16 +44,16 @@
       <input type="hidden" name="utype" value="withdraw_funds">
       {if $GLOBAL.twofactor.enabled && $GLOBAL.twofactor.options.withdraw}
       {if $GLOBAL.userdata.balance.confirmed|escape < $GLOBAL.config.mp_threshold}
-      <input type="submit" value="Unlock" class="btn btn-warning btn-sm" name="unlock"  disabled="disabled">
+      <input type="submit" value="認証URLを送信" class="btn btn-warning btn-sm" name="unlock"  disabled="disabled">
       {elseif $WITHDRAWSENT == 1 && $WITHDRAWUNLOCKED == 1}
-      <input type="submit" value="Cash Out" class="btn btn-success btn-sm">
+      <input type="submit" value="MONAを出金" class="btn btn-success btn-sm">
       {elseif $WITHDRAWSENT == 0 && $WITHDRAWUNLOCKED == 1 || $WITHDRAWSENT == 1 && $WITHDRAWUNLOCKED == 0}
-      <input type="submit" value="Cash Out" class="btn btn-danger btn-sm" disabled="disabled">
+      <input type="submit" value="MONAを出金" class="btn btn-danger btn-sm" disabled="disabled">
       {elseif $WITHDRAWSENT == 0 && $WITHDRAWUNLOCKED == 0}
-      <input type="submit" value="Unlock" class="btn btn-warning btn-sm" name="unlock">
+      <input type="submit" value="認証URLを送信" class="btn btn-warning btn-sm" name="unlock">
       {/if}
       {else}
-      <input type="submit" value="Cash Out" class="btn btn-success btn-sm">
+      <input type="submit" value="MONAを出金" class="btn btn-success btn-sm">
       {/if}
       {/nocache}
       </div>

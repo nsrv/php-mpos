@@ -6,14 +6,14 @@
     <input type="hidden" name="ctoken" value="{$CTOKEN|escape|default:""}">
     <div class="panel panel-info">
       <div class="panel-heading">
-        <i class="fa fa-gear fa-fw"></i> Notification Settings
+        <i class="fa fa-gear fa-fw"></i> 通知設定
       </div>
       <div class="panel-body no-padding">
         <table class="table table-striped table-bordered table-hover">
             {if $DISABLE_IDLEWORKERNOTIFICATIONS|default:"" != 1}
             <tr>
               <td>
-                <label>Idle Worker</label>
+                <label>ワーカーが停止したとき</label>
               </td>
               <td>
                 <input type="hidden" name="data[idle_worker]" value="0" />
@@ -24,7 +24,7 @@
             {if $DISABLE_BLOCKNOTIFICATIONS|default:"" != 1}
             <tr>
               <td>
-                <label>New Blocks</label>
+                <label>ブロック発見</label>
               </td>
               <td>
                 <input type="hidden" name="data[new_block]" value="0" />
@@ -34,7 +34,7 @@
             {/if}
             <tr>
               <td>
-                <label>Payout</label>
+                <label>出金をしたとき</label>
               </td>
               <td>
                 <input type="hidden" name="data[payout]" value="0" />
@@ -43,7 +43,7 @@
             </tr>
             <tr>
               <td>
-                <label>Successful Login</label>
+                <label>ログイン成功</label>
               </td>
               <td>
                 <input type="hidden" name="data[success_login]" value="0" />
@@ -53,7 +53,7 @@
             {if $DISABLE_POOLNEWSLETTER|default:"" != 1}
             <tr>
               <td>
-                <label>Pool Newsletter</label>
+                <label>ニュースレター</label>
               </td>
               <td>
                 <input type="hidden" name="data[newsletter]" value="0" />
@@ -64,7 +64,7 @@
         </table>
       </div>
       <div class="panel-footer">
-        <input type="submit" value="Update" class="btn btn-success btn-sm">
+        <input type="submit" value="設定を更新" class="btn btn-success btn-sm">
       </div>
     </form>
   </div>
@@ -72,7 +72,7 @@
   <div class="col-lg-8">
     <div class="panel panel-info">
       <div class="panel-heading">
-        <i class="fa fa-clock-o fa-fw"></i> Notification History
+        <i class="fa fa-clock-o fa-fw"></i> 通知履歴
       </div>
       <div class="panel-body no-padding">
         <div class="table-responsive">
@@ -80,9 +80,9 @@
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Time</th>
-                <th>Type</th>
-                <th>Active</th>
+                <th>時刻</th>
+                <th>種類</th>
+                <th>アクティブ</th>
               </tr>
             </thead>
             <tbody>
@@ -91,10 +91,10 @@
                 <td>{$NOTIFICATIONS[notification].id}</td>
                 <td>{$NOTIFICATIONS[notification].time}</td>
                 <td>
-{if $NOTIFICATIONS[notification].type == new_block}New Block
-{else if $NOTIFICATIONS[notification].type == payout}Payout
-{else if $NOTIFICATIONS[notification].type == idle_worker}Idle Worker
-{else if $NOTIFICATIONS[notification].type == success_login}Successful Login
+{if $NOTIFICATIONS[notification].type == new_block}新規ブロックを発見
+{else if $NOTIFICATIONS[notification].type == payout}出金リクエスト
+{else if $NOTIFICATIONS[notification].type == idle_worker}ワーカーの停止
+{else if $NOTIFICATIONS[notification].type == success_login}ログイン成功
 {/if}
                 </td>
                 <td>

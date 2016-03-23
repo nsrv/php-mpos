@@ -5,7 +5,7 @@
               </div>
               <div class="circle-tile-content lightblue">
                 <div class="circle-tile-description text-faded">
-                  <p class="h5 up-more">My Hashrate</p>
+                  <p class="h5 up-more">ハッシュレート</p>
                   <div class="circle-tile-number text-faded up">
                     <span class="overview" id="b-hashrate">{$GLOBAL.userdata.hashrate|number_format:"2"}</span>
                     <span class="overview-mhs"> {$GLOBAL.hashunits.personal}</span>
@@ -16,24 +16,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-spark-2 col-sm-6">
-            <div class="circle-tile fade">
-              <div class="circle-tile-heading lightblue">
-                <i class="fa fa-users fa-fw fa-2x"></i>
-              </div>
-              <div class="circle-tile-content lightblue">
-                <div class="circle-tile-description text-faded">
-                  <p class="h5 up-more">Pool Hashrate</p>
-                  <div class="circle-tile-number text-faded up">
-                    <span class="overview" id="b-poolhashrate">{$GLOBAL.hashrate|number_format:"2"}</span>
-                    <span class="overview-mhs"> {$GLOBAL.hashunits.pool}</span>
-                    <br>
-                    <span class="pool-hashrate-bar spark-18"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+
           <div class="col-md-spark-2 col-sm-6">
             <div class="circle-tile fade">
               <div class="circle-tile-heading lightblue">
@@ -41,7 +24,7 @@
               </div>
               <div class="circle-tile-content lightblue">
                 <div class="circle-tile-description text-faded">
-                  <p class="h5 up-more">My Sharerate</p>
+                  <p class="h5 up-more">シェアレート</p>
                   <div class="circle-tile-number text-faded up">
                     <span class="overview" id="b-sharerate">{$GLOBAL.userdata.sharerate|number_format:"2"}</span>
                     <span class="overview-mhs"> S/s</span>
@@ -59,7 +42,7 @@
               </div>
               <div class="circle-tile-content lightblue">
                 <div class="circle-tile-description text-faded">
-                  <p class="h5 up-more">Pool Workers</p>
+                  <p class="h5 up-more">プールのワーカー数</p>
                   <div class="circle-tile-number text-faded up">
                     <span class="overview" id="b-poolworkers">{$GLOBAL.workers}</span>
                     <br>
@@ -69,6 +52,26 @@
               </div>
             </div>
           </div>
+          
+          <div class="col-md-spark-2 col-sm-6">
+            <div class="circle-tile fade">
+              <div class="circle-tile-heading lightblue">
+                <i class="fa fa-users fa-fw fa-2x"></i>
+              </div>
+              <div class="circle-tile-content lightblue">
+                <div class="circle-tile-description text-faded">
+                  <p class="h5 up-more">プールのハッシュレート</p>
+                  <div class="circle-tile-number text-faded up">
+                    <span class="overview" id="b-poolhashrate">{$GLOBAL.hashrate|number_format:"2"}</span>
+                    <span class="overview-mhs"> {$GLOBAL.hashunits.pool}</span>
+                    <br>
+                    <span class="pool-hashrate-bar spark-18"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
           <div class="col-md-spark-2 col-sm-6">
             <div class="circle-tile fade">
               <div class="circle-tile-heading lightblue">
@@ -76,7 +79,7 @@
               </div>
               <div class="circle-tile-content lightblue">
                 <div class="circle-tile-description text-faded">
-                  <p class="h5 up-more">Net Hashrate</p>
+                  <p class="h5 up-more">全体のハッシュレート</p>
                   <div class="circle-tile-number text-faded up">
                     <span class="overview" id="b-nethashrate">{if $GLOBAL.nethashrate > 0}{$GLOBAL.nethashrate|number_format:"2"}{else}n/a{/if}</span>
                     <span class="overview-mhs"> {$GLOBAL.hashunits.network}</span>
